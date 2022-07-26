@@ -1,10 +1,14 @@
-import React from 'react';
+import React from "react";
+
+import Routes from "./routes";
+import ONavbar from "./components/organisms/ONavbar";
 
 function App() {
   return (
-    <div className="App">
-     <h1 className='text-green-500'>test</h1>
-    </div>
+    <main className="container w-full mx-auto h-full">
+      <ONavbar />
+      <Routes />
+    </main>
   );
 }
 
