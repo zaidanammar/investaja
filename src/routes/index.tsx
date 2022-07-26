@@ -7,23 +7,21 @@ const Dashboard = React.lazy(() => import("../pages/dashboard/Dashboard"));
 
 const MainRoutes = () => {
   return (
-    <section className="sm:pt-24 pt-[5rem]">
-      <Suspense
-        fallback={
-          <div className="flex justify-center pt-10">
-            <ALoading />
-          </div>
-        }
-      >
-        <Routes>
-          <Route path="/" element={<Outlet />}>
-            <Route path="/dashboard" element={<Dashboard />} />
+    <Suspense
+      fallback={
+        <div className="flex justify-center pt-10">
+          <ALoading />
+        </div>
+      }
+    >
+      <Routes>
+        <Route path="/" element={<Outlet />}>
+          <Route path="/dashboard" element={<Dashboard />} />
 
-            <Route path="/" element={<Navigate replace to="/dashboard" />} />
-          </Route>
-        </Routes>
-      </Suspense>
-    </section>
+          <Route path="/" element={<Navigate replace to="/dashboard" />} />
+        </Route>
+      </Routes>
+    </Suspense>
   );
 };
 

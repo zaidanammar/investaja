@@ -1,104 +1,44 @@
-import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-// import { IconButton, MenuItem, MenuList } from "@mui/material";
-import { IoIosArrowBack } from "react-icons/io";
-import { BsCart2 } from "react-icons/bs";
-// import { debounce } from "lodash";
+import React from "react";
+import { IconButton } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { FiSettings } from "react-icons/fi";
+import { IoMdNotificationsOutline } from "react-icons/io";
 
-// import ABadge from "../atoms/ABadge";
-// import AButton from "../atoms/AButton";
-// import MSearchbar from "../molecules/MSearchbar";
-// import { useFetchMovies } from "../../hooks/movie";
-// import { useAppSelector } from "../../store/hooks";
-// import { selectWishlist } from "../../store/wishlists/wishlistsSlice";
+import MSearchbar from "../molecules/MSearchbar";
+import MAccountInfo from "../molecules/MAccountInfo";
+import { logo } from "../../assets";
 
 const ONavbar = () => {
   const navigate = useNavigate();
-  const { pathname } = useLocation();
-
-  const [searchInput, setSearchInput] = useState("");
-  const [OpenSearchBar, setOpenSearchBar] = useState(false);
-
-  const handleSearch = (keyword: string) => {
-    navigate({ pathname: "/movie", search: `s=${keyword}` });
-  };
 
   return (
-    <nav className="sm:h-[5rem] h-[4rem] w-full fixed inset-0 z-20 bg-white shadow-lg">
-      <section className="flex sm:gap-5 items-center h-full w-full container mx-auto">
-        <div className="w-fit">
-          <div className="sm:flex hidden">
-            <h1
-              onClick={() => navigate("/movie")}
-              className="text-4xl font-bold text-primary cursor-pointer"
-            >
-              ZaifliX
-            </h1>
+    <nav className="sm:h-[5rem] h-[4.5rem] w-full fixed inset-0 z-20 md:px-10 px-4 bg-white shadow-lg">
+      <section className="flex sm:gap-4 gap-3 items-center justify-between h-full w-full">
+        <div className="flex gap-6 items-center">
+          <div className="sm:flex hidden w-32">
+            <img
+              src={logo}
+              onClick={() => navigate("/dashboard")}
+              alt="logo"
+              className="w-full"
+            />
           </div>
+
+          <MAccountInfo />
         </div>
 
-        <div className="flex-1 flex justify-center sm:gap-5 gap-3">
-          {/* <div className="w-full h-9">
-            <MSearchbar
-              onChange={debounce((e: React.ChangeEvent<HTMLInputElement>) => {
-                setSearchInput(e.target.value);
-              }, 300)}
-              onParentFocus={() => setOpenSearchBar(true)}
-              onParentBlur={(event) => {
-                if (!event.currentTarget.contains(event.relatedTarget)) {
-                  setOpenSearchBar(false);
-                }
-              }}
-              placeholder="Cari film? Cari disini yuk"
-            >
-              {OpenSearchBar && (
-                <div className="bg-white w-full px-2 mt-2 shadow-sm rounded">
-                  {!data?.pages[0] && (
-                    <p className="text-xs text-gray ml-2 py-3">No results</p>
-                  )}
-                  {data?.pages[0] && data?.pages[0]?.Search?.length > 0 && (
-                    <section>
-                      <MenuList dense>
-                        {data.pages[0]?.Search?.map((movie) => {
-                          return (
-                            <MenuItem
-                              onClick={async () => {
-                                handleSearch(movie.Title);
-                                setOpenSearchBar(false);
-                              }}
-                              sx={{ color: "gray" }}
-                              key={movie.imdbID}
-                            >
-                              {movie.Title}
-                            </MenuItem>
-                          );
-                        })}
-                      </MenuList>
-                    </section>
-                  )}
-                </div>
-              )}
-            </MSearchbar>
-          </div> */}
+        <div className="flex flex-1 justify-end items-center gap-1">
+          <div className="xs:w-80 w-full">
+            <MSearchbar placeholder="Search here..." />
+          </div>
 
-          <div className="flex items-center sm:w-[30%] h-10">
-            {/* <div className="sm:flex hidden w-full h-full">
-              <AButton handleClick={() => navigate("/wishlist")}>
-                <p className="ml-3">Wishlist</p>
-                <IconButton>
-                  <ABadge badgeContent={wishlists.length} color="secondary">
-                    <BsCart2 className="fill-white" size={18} />
-                  </ABadge>
-                </IconButton>
-              </AButton>
-            </div>
-            <div className="sm:hidden">
-              <IconButton onClick={() => navigate("/wishlist")}>
-                <ABadge badgeContent={wishlists.length}>
-                  <BsCart2 className="fill-primary" size={24} />
-                </ABadge>
-              </IconButton>
-            </div> */}
+          <div className="flex items-center">
+            <IconButton>
+              <IoMdNotificationsOutline className="fill-textPrimary" />
+            </IconButton>
+            <IconButton>
+              <FiSettings className="stroke-textPrimary" size={20} />
+            </IconButton>
           </div>
         </div>
       </section>
