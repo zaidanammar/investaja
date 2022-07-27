@@ -16,7 +16,7 @@ const MAccountInfo = () => {
       </div>
       <div className="md:flex flex-col hidden w-40 overflow-hidden">
         <h3 className="font-bold text-textPrimary w-full truncate">
-          Reinhart Hscacsasa.
+          Reinhart H.
         </h3>
         <h5 className="font-normal text-textSecondary text-xs">
           Kemang, Jakarta

@@ -2,11 +2,13 @@ import React from "react";
 
 import Routes from "./routes";
 import ONavbar from "./components/organisms/ONavbar";
+import MDateBar from "./components/molecules/MDateBar";
 
 function App() {
   return (
-    <main className="md:px-10 px-4 md:pt-28 pt-24 w-full h-full">
+    <main className="pt-20 w-full h-full">
       <ONavbar />
+      <MDateBar />
       <Routes />
     </main>
   );

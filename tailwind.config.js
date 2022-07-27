@@ -21,10 +21,11 @@ module.exports = {
         sans: ['Nunito', 'sans-serif'],
       },
       colors: {
-        primary: "#2191FB",
-        secondary: "#E1F5FE",
+        primary: "#82C341",
+        secondary: "#F5F5F5",
         textPrimary: "#333333",
         textSecondary: "#9C9C9C",
+        borderColor: "#E5E5E5"
       },
       boxShadow: {
         'md': '0 0 15px rgba(0, 0, 0, 0.1)',

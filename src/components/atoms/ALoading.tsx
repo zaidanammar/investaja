@@ -8,7 +8,7 @@ type Props = {
 };
 
 const ALoading = ({
-  color = "#D0071E",
+  color = "#82C341",
   width = 80,
   height = 80,
   type = "spin",

@@ -12,9 +12,9 @@ const ONavbar = () => {
   const navigate = useNavigate();
 
   return (
-    <nav className="sm:h-[5rem] h-[4.5rem] w-full fixed inset-0 z-20 md:px-10 px-4 bg-white shadow-lg">
+    <nav className="h-20 w-full fixed inset-0 z-20 px-5 bg-white shadow">
       <section className="flex sm:gap-4 gap-3 items-center justify-between h-full w-full">
-        <div className="flex gap-6 items-center">
+        <div className="flex lg:gap-6 gap-3 items-center">
           <div className="sm:flex hidden w-32">
             <img
               src={logo}
@@ -32,7 +32,7 @@ const ONavbar = () => {
             <MSearchbar placeholder="Search here..." />
           </div>
 
-          <div className="flex items-center">
+          <div className="flex justify-between items-center">
             <IconButton>
               <IoMdNotificationsOutline className="fill-textPrimary" />
             </IconButton>
