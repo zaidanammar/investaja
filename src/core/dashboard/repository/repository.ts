@@ -1,14 +1,16 @@
 import IDashboardRepository from "../repository";
 import Instance from "../../../config";
-import { IOrder } from "../entities";
+import { IOrder, IUserCategory } from "../entities";
 
 export default class DashboardRepository implements IDashboardRepository {
   private DASHBOARD_ROUTE = "/takehometest/web/dashboard";
 
   async getDashboards(): Promise<{
     code: string;
-    orders: IOrder[];
-    data: any;
+    data: {
+      orders: IOrder[];
+      user_category: IUserCategory;
+    };
   }> {
     try {
       const response = await Instance().get(this.DASHBOARD_ROUTE);

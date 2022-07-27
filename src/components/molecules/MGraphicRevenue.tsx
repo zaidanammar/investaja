@@ -3,28 +3,33 @@ import { Area } from "@ant-design/plots";
 import { TiArrowUpThick } from "react-icons/ti";
 
 import AContainer from "../atoms/AContainer";
-import { revenue } from "../../data/revenue";
 
-const config = {
-  data: revenue,
-  color: "#789764",
-  xField: "Date",
-  yField: "scales",
-  xAxis: {
-    tickCount: 5,
-  },
-  animation: true,
-  height: 330,
-  slider: {
-    start: 0.1,
-    end: 0.9,
-    trendCfg: {
-      isArea: true,
+const config = (data: any[]) => {
+  return {
+    color: "#789764",
+    xField: "Date",
+    yField: "scales",
+    xAxis: {
+      tickCount: 5,
     },
-  },
+    data: data,
+    animation: true,
+    height: 330,
+    slider: {
+      start: 0.1,
+      end: 0.9,
+      trendCfg: {
+        isArea: true,
+      },
+    },
+  };
 };
 
-const MGraphicRevenue = () => {
+type Props = {
+  data: any;
+};
+
+const MGraphicRevenue = ({ data }: Props) => {
   return (
     <AContainer border>
       <div className="flex justify-between items-center">
@@ -34,7 +39,7 @@ const MGraphicRevenue = () => {
         </div>
       </div>
       <div className="mt-10">
-        <Area {...config} />
+        <Area {...config(data)} />
       </div>
       <aside>
         <h6 className="text-textSecondary">Total Revenue</h6>

@@ -8,3 +8,10 @@ export interface IOrder {
   conversion_item: string;
   conversion_revenue: string;
 }
+
+export interface IUserCategory {
+  risk_averse: string;
+  conservative: string;
+  moderate: string;
+  risk_taker: string;
+}

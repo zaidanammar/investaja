@@ -25,7 +25,11 @@ module.exports = {
         secondary: "#F5F5F5",
         textPrimary: "#333333",
         textSecondary: "#9C9C9C",
-        borderColor: "#E5E5E5"
+        borderColor: "#E5E5E5",
+        activeColor: "#EFF7FF",
+        completed: '#789764',
+        pending: '#E59849',
+        canceled: '#D66D4B',
       },
       boxShadow: {
         'md': '0 0 15px rgba(0, 0, 0, 0.1)',
