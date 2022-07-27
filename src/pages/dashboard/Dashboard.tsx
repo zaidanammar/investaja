@@ -37,6 +37,8 @@ const Dashboard = () => {
     return orders && DashboardService.getDataRevenues(orders);
   }, [dataDashboard]);
 
+  console.log(dataConversions)
+
   return (
     <AContainer>
       {isLoading ? (
@@ -48,7 +50,11 @@ const Dashboard = () => {
           <section className="md:flex gap-5">
             <div className="md:w-1/2 w-full sm:flex gap-5">
               {dataConversions && (
-                <MChartBox title="Conversion" data={dataConversions} />
+                <MChartBox
+                  title="Conversion"
+                  data={dataConversions}
+                  prefix="$"
+                />
               )}
               {dataUsers && (
                 <MChartBox

@@ -29,13 +29,14 @@ export class DashboardService {
     const conversion: any = {};
 
     for (let i = 0; i < orders.length; i++) {
-      if (conversion[orders[i].conversion_item] !== undefined) {
-        conversion[orders[i].conversion_item] = +orders[i].conversion_revenue;
+      let item = orders[i].conversion_item;
+
+      if (conversion[item] !== undefined) {
+        conversion[item] += Number(orders[i].conversion_revenue);
       } else {
-        conversion[orders[i].conversion_item] = +orders[i].conversion_revenue;
+        conversion[item] = Number(orders[i].conversion_revenue);
       }
     }
-
     return Object.entries(conversion).map((e) => ({
       type: e[0],
       value: e[1],

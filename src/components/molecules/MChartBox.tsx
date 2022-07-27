@@ -8,34 +8,39 @@ type Props = {
   title: string;
   data: any[];
   containerProps?: string;
+  prefix?: string;
 };
 
-export const config = {
-  color: ["#725E9C", "#EBA45E", "#5C8F94", "#E4EAEB"],
-  appendPadding: 20,
-  angleField: "value",
-  colorField: "type",
-  radius: 1,
-  label: {
-    type: "inner",
-    offset: "-30%",
-    style: {
-      fontSize: 14,
-      textAlign: "center",
+export const config = (prefix?: string) => {
+  return {
+    color: ["#725E9C", "#EBA45E", "#5C8F94", "#E4EAEB"],
+    appendPadding: 20,
+    angleField: "value",
+    colorField: "type",
+    radius: 1,
+    label: {
+      type: "inner",
+      offset: "-30%",
+      content: (content: any) =>
+        prefix ? `${prefix}${content.value}` : content.value,
+      style: {
+        fontSize: 14,
+        textAlign: "center",
+      },
     },
-  },
-  legend: {
-    layout: "horizontal" as "horizontal",
-    position: "bottom" as "bottom",
-  },
-  interactions: [
-    {
-      type: "element-active",
+    legend: {
+      layout: "horizontal" as "horizontal",
+      position: "bottom" as "bottom",
     },
-  ],
+    interactions: [
+      {
+        type: "element-active",
+      },
+    ],
+  };
 };
 
-const MChartBox = ({ title, containerProps, data }: Props) => {
+const MChartBox = ({ title, containerProps, data, prefix }: Props) => {
   return (
     <AContainer border className={containerProps}>
       <div className="flex justify-between items-center">
@@ -45,7 +50,7 @@ const MChartBox = ({ title, containerProps, data }: Props) => {
         </div>
       </div>
       <div>
-        <Pie {...config} data={data} />
+        <Pie {...config(prefix)} data={data} />
       </div>
     </AContainer>
   );
