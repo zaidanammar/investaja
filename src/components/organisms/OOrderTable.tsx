@@ -5,6 +5,7 @@ import { IOrder } from "../../core/dashboard/entities";
 import MPagination from "../molecules/MPagination";
 import ABadge from "../atoms/ABadge";
 import { IDate } from "../molecules/MDatePicker";
+import { DashboardService } from "../../services/dashboard";
 
 const tableTitle = [
   "Order Number",
@@ -25,14 +26,7 @@ const OOrderTable = ({ data, date }: Props) => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const filteredorders = useMemo(
-    () =>
-      data.filter((order) => {
-        let orderDate = new Date(order.start_date);
-        return (
-          orderDate >= new Date(date[0].startDate) &&
-          orderDate <= new Date(date[0].endDate)
-        );
-      }),
+    () => DashboardService.getFilteredOrders(data, date),
     [data, date]
   );
 

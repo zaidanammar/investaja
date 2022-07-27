@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import moment from "moment";
+import React, { useMemo, useState } from "react";
 import { addYears } from "date-fns";
 
 import AContainer from "../../components/atoms/AContainer";
@@ -10,11 +9,9 @@ import MGraphicRevenue from "../../components/molecules/MGraphicRevenue";
 import OOrderTable from "../../components/organisms/OOrderTable";
 import { useFetchDashboards } from "../../apis/dashboard";
 import { defineds } from "../../utils/date";
+import { DashboardService } from "../../services/dashboard";
 
 const Dashboard = () => {
-  const [dataUser, setDataUser] = useState<any[]>([]);
-  const [dataConversion, setDataConversion] = useState<any[]>([]);
-  const [dataRevenue, setDataRevenue] = useState<any[]>([]);
   const [date, setDate] = useState([
     {
       startDate: addYears(new Date("01/01/2022"), -2),
@@ -25,88 +22,63 @@ const Dashboard = () => {
 
   const { data: dataDashboard, isLoading } = useFetchDashboards();
 
-  useEffect(() => {
-    if (dataDashboard) {
-      const conversion: any = {};
-      const orders = dataDashboard?.data?.orders;
-      setDataUser(
-        Object.entries(dataDashboard?.data?.user_category).map((e) => ({
-          type: e[0].split("_").join(" "),
-          value: +e[1],
-        }))
-      );
-      for (let i = 0; i < orders.length; i++) {
-        if (conversion[orders[i].conversion_item] !== undefined) {
-          conversion[orders[i].conversion_item] = +orders[i].conversion_revenue;
-        } else {
-          conversion[orders[i].conversion_item] = +orders[i].conversion_revenue;
-        }
-      }
-      setDataConversion(
-        Object.entries(conversion).map((e) => ({
-          type: e[0],
-          value: e[1],
-        }))
-      );
-      setDataRevenue(
-        orders
-          .filter((e) => e.status === "completed")
-          .map((e) => ({
-            Date: moment(e.due_date).format("DD/MM/YYYY"),
-            scales: +e.conversion_revenue,
-          }))
-      );
-    }
+  const dataUsers = useMemo(() => {
+    const user_category = dataDashboard?.data?.user_category;
+    return user_category && DashboardService.getDataUsers(user_category);
+  }, [dataDashboard]);
+
+  const dataConversions = useMemo(() => {
+    const orders = dataDashboard?.data?.orders;
+    return orders && DashboardService.getDataConversions(orders);
+  }, [dataDashboard]);
+
+  const dataRevenues = useMemo(() => {
+    const orders = dataDashboard?.data?.orders;
+    return orders && DashboardService.getDataRevenues(orders);
   }, [dataDashboard]);
 
   return (
     <AContainer>
-      <section className="md:flex gap-5">
-        <div className="md:w-1/2 w-full sm:flex gap-5">
-          {isLoading ? (
-            <div className="w-full flex items-center justify-center my-20">
-              <ALoading />
-            </div>
-          ) : (
-            <>
-              <MChartBox title="Conversion" data={dataConversion} />
-              <MChartBox
-                title="User"
-                data={dataUser}
-                containerProps="sm:mt-0 mt-5"
-              />
-            </>
-          )}
+      {isLoading ? (
+        <div className="flex items-center justify-center my-20">
+          <ALoading />
         </div>
-        <div className="md:w-1/2 md:mt-0 mt-5">
-          {isLoading ? (
-            <div className="w-full flex items-center justify-center my-20">
-              <ALoading />
+      ) : (
+        <div>
+          <section className="md:flex gap-5">
+            <div className="md:w-1/2 w-full sm:flex gap-5">
+              {dataConversions && (
+                <MChartBox title="Conversion" data={dataConversions} />
+              )}
+              {dataUsers && (
+                <MChartBox
+                  title="User"
+                  data={dataUsers}
+                  containerProps="sm:mt-0 mt-5"
+                />
+              )}
             </div>
-          ) : (
-            <div>
-              <MGraphicRevenue data={dataRevenue} />
+            <div className="md:w-1/2 md:mt-0 mt-5">
+              {dataRevenues && <MGraphicRevenue data={dataRevenues} />}
             </div>
-          )}
-        </div>
-      </section>
+          </section>
 
-      <section className="md:flex gap-5 mt-5">
-        <MDatePicker dateProps={date} handleChangeDate={(e) => setDate(e)} />
-        <div className="mt-3 flex-1">
-          {isLoading && (
-            <div className="flex items-center justify-center my-20">
-              <ALoading />
+          <section className="md:flex gap-5 mt-5">
+            <MDatePicker
+              dateProps={date}
+              handleChangeDate={(e) => setDate(e)}
+            />
+            <div className="mt-3 flex-1">
+              {dataDashboard?.data?.orders && (
+                <div>
+                  <h2 className="text-textPrimary">Orders</h2>
+                  <OOrderTable date={date} data={dataDashboard.data.orders} />
+                </div>
+              )}
             </div>
-          )}
-          {dataDashboard?.data?.orders && (
-            <div>
-              <h2 className="text-textPrimary">Orders</h2>
-              <OOrderTable date={date} data={dataDashboard.data.orders} />
-            </div>
-          )}
+          </section>
         </div>
-      </section>
+      )}
     </AContainer>
   );
 };

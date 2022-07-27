@@ -9,7 +9,7 @@ const MainRoutes = () => {
   return (
     <Suspense
       fallback={
-        <div className="flex justify-center pt-10">
+        <div className="flex justify-center pt-24">
           <ALoading />
         </div>
       }
