@@ -72,6 +72,7 @@ const OOrderTable = ({ data, date }: Props) => {
           data={filteredorders}
           rowsPerPage={rowsPerPage}
           setPage={setPage}
+          page={page}
           setRowsPerPage={setRowsPerPage}
         />
       </aside>

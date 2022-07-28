@@ -26,9 +26,13 @@ const MDatePicker = ({ dateProps, handleChangeDate }: Props) => {
   };
 
   return (
-    <aside className="sm:w-fit w-full h-full border p-5 rounded-md">
+    <aside
+      data-testid="date-picker"
+      className="sm:w-fit w-full h-full border p-5 rounded-md"
+    >
       <DateRange
         className="w-full"
+        data-testid="content-input"
         minDate={addYears(new Date(), -5)}
         maxDate={new Date()}
         onChange={(item: any) => setDate([item.selection])}

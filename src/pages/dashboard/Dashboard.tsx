@@ -37,8 +37,6 @@ const Dashboard = () => {
     return orders && DashboardService.getDataRevenues(orders);
   }, [dataDashboard]);
 
-  console.log(dataConversions)
-
   return (
     <AContainer>
       {isLoading ? (

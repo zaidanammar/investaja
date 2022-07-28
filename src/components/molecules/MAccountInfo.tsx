@@ -4,7 +4,7 @@ import { FiChevronDown } from "react-icons/fi";
 
 const MAccountInfo = () => {
   return (
-    <section className="flex gap-4 items-center">
+    <section test-id="account-info" className="flex gap-4 items-center">
       <div>
         <Avatar
           sx={{
