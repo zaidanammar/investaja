@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { FiSettings } from "react-icons/fi";
 import { IoMdNotificationsOutline } from "react-icons/io";
 
-import MSearchbar from "../molecules/MSearchbar";
 import MAccountInfo from "../molecules/MAccountInfo";
+import MSearchBar from "../molecules/MSearchBar";
 import { logo } from "../../assets";
 
 const ONavbar = () => {
@@ -29,7 +29,7 @@ const ONavbar = () => {
 
         <div className="flex flex-1 justify-end items-center gap-1">
           <div className="xs:w-80 w-full">
-            <MSearchbar placeholder="Search here..." />
+            <MSearchBar placeholder="Search here..." />
           </div>
 
           <div className="flex justify-between items-center">

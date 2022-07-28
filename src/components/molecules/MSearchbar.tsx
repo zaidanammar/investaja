@@ -1,26 +1,15 @@
-import React, { ChangeEventHandler, FocusEventHandler } from "react";
+import React, { ChangeEventHandler } from "react";
 import { IconButton, InputBase } from "@mui/material";
 import { IoIosSearch } from "react-icons/io";
 
 type Props = {
-  onParentFocus?: FocusEventHandler<HTMLDivElement>;
-  onParentBlur?: FocusEventHandler<HTMLDivElement>;
   onChange?: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   placeholder: string;
 };
 
-const MSearchbar = ({
-  onParentFocus,
-  onParentBlur,
-  placeholder,
-  onChange,
-}: Props) => {
+const MSearchBar = ({ placeholder, onChange }: Props) => {
   return (
-    <div
-      onFocus={onParentFocus}
-      onBlur={onParentBlur}
-      className="h-full w-full"
-    >
+    <div className="h-full w-full">
       <div className="relative flex bg-white rounded shadow-sm border">
         <InputBase
           onChange={onChange}
@@ -36,4 +25,4 @@ const MSearchbar = ({
   );
 };
 
-export default MSearchbar;
+export default MSearchBar;
